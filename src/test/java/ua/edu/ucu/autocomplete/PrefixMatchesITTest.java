@@ -1,11 +1,12 @@
-
 package ua.edu.ucu.autocomplete;
 
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Test;
 import ua.edu.ucu.tries.RWayTrie;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -14,6 +15,7 @@ import ua.edu.ucu.tries.RWayTrie;
 public class PrefixMatchesITTest {
 
     private PrefixMatches pm;
+    private PrefixMatches dictionaryWords;
 
     @Before
     public void init() {
@@ -28,7 +30,6 @@ public class PrefixMatchesITTest {
         Iterable<String> result = pm.wordsWithPrefix(pref);
 
         String[] expResult = {"abc", "abce", "abcd", "abcde", "abcdef"};
-
         assertThat(result, containsInAnyOrder(expResult));
     }
 
@@ -42,6 +43,15 @@ public class PrefixMatchesITTest {
         String[] expResult = {"abc", "abce", "abcd", "abcde"};
 
         assertThat(result, containsInAnyOrder(expResult));
+    }
+
+    @Test
+    public void testWordsWithPrefix_size() {
+
+        Integer result = pm.size();
+
+        Integer expResult = 5;
+        assertSame(result, expResult);
     }
 
 }
